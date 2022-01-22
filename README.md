@@ -9,7 +9,7 @@
 
 ## 2. Code Details:
 
-> Words below state design thoughts and `details shown in the diagram`.
+> Words below state design thoughts (in normal font) and `details shown in the diagram (in this font)`.
 
 ### Initialization:
 > This code realized a bitcoin system in the UTXO model. The system was initialed with three nodes. Each node control 4 keypairs (randomly in different runs). When the system is initialed, every miner will add 2 states in their ledger state value in the blockchain. When mining starts, three nodes will synchronize their states with each other’s periodically in the whole mining process. This was done by sending a message of their states and receiving new states from others. 
@@ -25,7 +25,7 @@
 
 > `In the diagram, the most obvious part is the green blocks. Deep green blocks mean generated transactions, light green blocks mean transactions heard from other nodes, and purple blocks mean adversarial transactions generated. Transaction generating is processed in the mining loop as the figure shows.`
 
-### Miners:
+### Transactions Confirmation:
 
 > After each transaction is generated (confirmed or adversary), the miner will check whether the transaction is qualified for the ledger state which is kept in the blockchain. If it passes the check, this transaction will be added to the transaction memory pool in the chain controlled by this miner. Meanwhile, other miners who get the new transaction message will check the validation in their chain too, making sure everything goes right. 
 
@@ -37,13 +37,13 @@
 > 
 > `In the figure above, block1 was mined at some time. It contains two transactions – Tx2 and Tx3. Used 2 UTXO (state4 and state6) and generated 2 UTXO (state7 and state8). The tx mempool, ledger state, and block-chain update.`
 
-### Block Validation Check:
+### Mining (block confirming):
 > The insert function could check whether this block should be the tip one. If it is the tip one and there’s no confliction with other blocks, the state in the new block’s transaction input-part will be deleted from the ledger state. And the output of the transaction will be added in the ledger state. Meanwhile, transactions included by the block will be deleted from the transaction memory pool. However, if the block has a height the same as the tip, the function will check the timestamp in their header for decision. If the later insert one does have an earlier timestamp, the function will return the inserted old block’s transaction and states. Then, dealing with the real tip. 
 > 
 > `As in the diagram, block2 was mined earlier than block one but delayed sending information. So, when nodes heard block2, block1 has already been inserted into the chain. UTXOs and transactions are handled already. By checking the timestamp, Tx3 and Tx2 are returned in tx mempool. Same as state4 and state6. Then, Tx3 and Tx1 are selected for block2, things reset correctly for ledger state and tx mempool.`
 
 ### Other Details:
-> For transaction confirmation, four checks will be done in each confirmation. First, coin existing check. The input should be a valid UTXO (whether an input is in the ledger state). Second, owner check. The transaction’s public key should be consensus with the input state’s address. Third, signature check.  Checking whether the signature was signed by the public key in the transaction. Third, value check. The output value should be smaller than the input one.
+> For transaction confirmation, four checks will be done in each confirmation. First, coin existing check. The input should be a valid UTXO (whether an input is in the ledger state). Second, owner check. The transaction’s public key should be consensus with the input state’s address. Third, signature check.  Checking whether the signature was signed by the public key in the transaction. Fourth, value check. The output value should be smaller than the input one.
 
 > I also realized transaction fees when mining blocks. At the beginning of the initializing system, I give each miner a keypair as their own key. When a new block was mined, there will be a 2 BTC fee for its miner and a UTXO was generated for their address. Though these UTXOs are not included in generating transactions. (Maybe I’m the miner and want to save money instead of spending them). Transactions fees have a previous transaction hash 0 to differentiate with another normal one. 
 
