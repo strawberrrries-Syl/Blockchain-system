@@ -1,6 +1,6 @@
 # Blockchain-system   `Rust`
 
->   The original project must keep private (rules from the University). So, in this repository, I introduced the system design details. Also, the final system can run smoothly with at least 3 threads. You can see the demo video here: https://drive.google.com/open?id=105RjAJYSHRPjlkYPsR0e6m8DtWpSufL9&authuser=zhaojieli2022%40u.northwestern.edu&usp=drive_fs
+>   The original project must keep private (rules from the University). So, in this repository, I introduced the system design details. Part source code are uploaded in the `scr` fold. The final system can run smoothly with at least 3 threads. You can see the demo video here: https://drive.google.com/open?id=105RjAJYSHRPjlkYPsR0e6m8DtWpSufL9&authuser=zhaojieli2022%40u.northwestern.edu&usp=drive_fs
 
 ## 1. Design diagram:
 > The figure below is a design diagram of code. The diagram was pictured in a timeline sequence. At the top is the stage system at system started with initializing. Then is mining. The timeline shows the main event happening. Node1, node2, and node3 are things that happened for each miner. Ledger state explains the consensus state change (UTXO change) when the timeline goes. Similarly, the tx mem pool and blockchain show their consensus changing as time goes by. Details in the diagram will explain in paragraphs later.
