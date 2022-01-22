@@ -1,4 +1,4 @@
-# Blockchain-system
+# Blockchain-system   `Rust`
 
 >   The original project must keep private (rules from the University). So, in this repository, I introduced the system design details. Also, the final system can run smoothly with at least 3 threads. You can see the demo video here: https://drive.google.com/open?id=105RjAJYSHRPjlkYPsR0e6m8DtWpSufL9&authuser=zhaojieli2022%40u.northwestern.edu&usp=drive_fs
 
